@@ -52,6 +52,6 @@ func main() {
 	a1, a2 := &A1{}, &A2{}
 	SetInner(a1, B1{})
 	SetInner(a2, B2{})
-	fmt.Println(refl.Inspect(a1))
-	fmt.Println(refl.Inspect(a2))
+	fmt.Println(refl.Inspect(a1)) // &main.A1{Inner:main.B1{}} ()
+	fmt.Println(refl.Inspect(a2)) // &main.A2{Inner:main.B2{}} ()
 }
