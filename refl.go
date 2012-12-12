@@ -14,12 +14,18 @@ func Inspect(i interface{}) (s string) {
 	return
 }
 
-func Apply(a interface{}, meth string, b interface{}) {
+func P(i interface{}) {
+	fmt.Println(Inspect(i))
+	return
+}
+
+// sets a field on a struct a with value b
+// a and b are casted to their internal values so that
+// different mixtures of a's and b's are possible
+func PolySetField(a interface{}, field string, b interface{}) {
 	x := reflect.ValueOf(a).Interface()
 	y := reflect.ValueOf(b).Interface()
-	//refl.SetField(ps, "Inner", t)
-	//p(refl.Inspect(refl.GetField(ps, "Inner")))
-	Call(&x, meth, &y)
+	SetField(x, field, y)
 }
 
 // returns the type
