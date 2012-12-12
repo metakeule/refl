@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/metakeule/refl"
+	"reflect"
 )
 
 type Rating struct {
@@ -38,6 +39,10 @@ func SetInner(a interface{}, b interface{}) {
 	refl.PolySetField(a, "Inner", b)
 }
 
+type WithFunc struct {
+	Fn func(*B1)
+}
+
 func main() {
 	g := Game{Rating{2, 300}, "Game of life"}
 	p(refl.Type(g))              // => "Game"
@@ -54,4 +59,9 @@ func main() {
 	SetInner(a2, B2{})
 	fmt.Println(refl.Inspect(a1)) // &main.A1{Inner:main.B1{}} ()
 	fmt.Println(refl.Inspect(a2)) // &main.A2{Inner:main.B2{}} ()
+
+	w := WithFunc{func(b *B1) { refl.P(b) }}
+	f := refl.GetField(&w, "Fn").(func(*B1))
+	refl.CallFn(f, &B1{})
+	f(&B1{})
 }

@@ -38,7 +38,18 @@ func Kind(i interface{}) string {
 	return reflect.TypeOf(i).Kind().String()
 }
 
-// calls a function with vals, but doesn't return anything
+// calls function ø with vals, but doesn't return anything
+func CallFn(ø interface{}, vals ...interface{}) {
+	params := []reflect.Value{}
+	for i := range vals {
+		if vals[i] != nil {
+			params = append(params, reflect.ValueOf(vals[i]))
+		}
+	}
+	reflect.ValueOf(ø).Call(params)
+}
+
+// calls a method of ø with vals, but doesn't return anything
 func Call(ø interface{}, meth string, vals ...interface{}) {
 	m := reflect.ValueOf(ø).MethodByName(meth)
 	if !m.IsValid() {
