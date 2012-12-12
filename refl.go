@@ -14,6 +14,14 @@ func Inspect(i interface{}) (s string) {
 	return
 }
 
+func Apply(a interface{}, meth string, b interface{}) {
+	x := reflect.ValueOf(a).Interface()
+	y := reflect.ValueOf(b).Interface()
+	//refl.SetField(ps, "Inner", t)
+	//p(refl.Inspect(refl.GetField(ps, "Inner")))
+	Call(&x, meth, &y)
+}
+
 // returns the type
 func Type(i interface{}) string {
 	return reflect.TypeOf(i).Name()
