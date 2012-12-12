@@ -32,5 +32,5 @@ func main() {
 	refl.SetField(&g.Rating, "Points", 400)
 	p(g.Points) // 400
 	refl.Set(&g.Rating, Rating{5, 800})
-	p(g.Points) // 600
+	p(g.Points) // 800
 }
