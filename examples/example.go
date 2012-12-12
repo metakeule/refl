@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/metakeule/refl"
-	"reflect"
 )
 
 type Rating struct {
